@@ -10,7 +10,7 @@ class Paddle {
     this._velX = 10
     this._keys = keys
     this.setEventListener()
-    this.direction = {
+    this._direction = {
       LEFT: false,
       RIGHT: false
     }
@@ -26,10 +26,10 @@ class Paddle {
   }
 
   move() {
-    if(this.direction.LEFT) {
+    if(this._direction.LEFT) {
       this._posX -= 10
     }
-    if (this.direction.LEFT) {
+    if (this._direction.LEFT) {
       this._posX += 10
     }
    
@@ -37,31 +37,53 @@ class Paddle {
   
 
   setEventListener() {
-    document.onkeydown = (e) => {
-      switch(e.keycode) {
-        case this._keys.LEFT:
-          this.direction.LEFT = true
-        break;
-        case this._keys.RIGHT:
-          this.direction.RIGHT = true
-        break;
-      } 
-    }
-    console.log(e)
-  }
+      addEventListener('keydown', (e) => {
+       console.log(this._direction.LEFT)
+        switch (e.keycode) {
+         case this._keys.LEFT:
+            this._direction.LEFT = true
+           break;
+           case this._keys.RIGHT:
+           this._direction.RIGHT = true
+           break;
+        }
+           })
 
-  setEventListener() {
-    document.onkeyup = (e) => {
+  
+    addEventListener('keyup', (e) => {
       switch (e.keycode) {
         case this._keys.LEFT:
-          this.direction.LEFT = false
+          this._direction.LEFT = false
           break;
         case this._keys.RIGHT:
-          this.direction.RIGHT = false
+          this._direction.RIGHT = false
           break;
       }
-    }
+    })
+
+
   }
-  
-  
 }
+  // document.onkeydown = (e) => {
+    //   console.log(this._direction.LEFT)
+    //   switch(e.keycode) {
+    //     case this._keys.LEFT:
+    //       this._direction.LEFT = true
+    //     break;
+    //     case this._keys.RIGHT:
+    //       this._direction.RIGHT = true
+    //     break;
+    //   } 
+    // }
+
+    // document.onkeyup = (e) => {
+    //   switch (e.keycode) {
+    //     case this._keys.LEFT:
+    //       this._direction.LEFT = false
+    //       break;
+    //     case this._keys.RIGHT:
+    //       this._direction.RIGHT = false
+    //       break;
+    //   }
+    // }
+ 
