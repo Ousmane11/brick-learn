@@ -31,8 +31,7 @@ setDimensions: function () {
 
 start: function () {
 this.reset ()
-// this.setEventListeners()
-//this.paddle.setEventListeners()  esto lo tengo en comentado en paddle page
+
   this.Interval = setInterval(() => {
     this.clearAll()
     this.moveAll()
@@ -57,25 +56,5 @@ clearAll:function () {
   moveAll: function () {
     this.paddle.move()
   }
-
-// setEventListeners: function () {
-//   document.onclick = event => {
-//     console.log(event)
-//   }
-//     document.onkeydown = (e) => {
-//       switch (e.keycode) {
-//         case this.keys.LEFT:
-//           alert("yay")
-//           break;
-//         case this.keys.RIGHT:
-//           this._posX += 10
-
-//           break;
-    
-//     }
-//   }
-// }
-
-
 
 }

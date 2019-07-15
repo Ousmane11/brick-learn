@@ -7,7 +7,7 @@ class Paddle {
     this._posY = y
     this._width = w
     this._height = h
-    this._velX = 10
+    this._velX = 15
     this._keys = keys
     this.setEventListener()
    this._direction = {
@@ -29,10 +29,10 @@ class Paddle {
   move() {
     
     if(this._direction.left) {
-      this._posX -= 10
+      this._posX > 0 ? this._posX -= this._velX : null
     }
     if (this._direction.right) {
-      this._posX += 10
+      this._posX < window.innerWidth -180 ? this._posX += this._velX : null
     }
    
   }
@@ -41,7 +41,7 @@ class Paddle {
   
       addEventListener('keydown', (e) => {
         switch (e.keyCode) {
-         case 37:          
+         case 37:
             this._direction.left = true
       
            break;
