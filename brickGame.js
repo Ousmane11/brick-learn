@@ -42,11 +42,14 @@ this.reset ()
 reset: function () {
 this.background = new Background(this.ctx,this.width,this.height)
 this.paddle = new Paddle(this.ctx, 180, 80,this.width/2 - 90 , this.height -60,this.keys)
+this.ball = new Ball(this.ctx, 40, 40, this.paddle._posX-70)
 },
 
 drawAll: function () {
   this.background.draw()
   this.paddle.draw()
+  this.ball._posX = this.paddle._posX +70  //no actualizaba la pos de paddle para dibujar ball.
+  this.ball.draw()
 },
 
 clearAll:function () {
@@ -55,6 +58,7 @@ clearAll:function () {
 
   moveAll: function () {
     this.paddle.move()
+    this.ball.move()
   }
 
 }
