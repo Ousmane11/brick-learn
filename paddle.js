@@ -27,21 +27,23 @@ class Paddle {
   }
 
   move() {
+    
     if(this._direction.left) {
       this._posX -= 10
     }
-    if (this._direction.left) {
+    if (this._direction.right) {
       this._posX += 10
     }
    
   }
  
   setEventListener() {
+  
       addEventListener('keydown', (e) => {
-       console.log(this._direction.right)
-        switch (e.keycode) {
-         case 37:
+        switch (e.keyCode) {
+         case 37:          
             this._direction.left = true
+      
            break;
            case 39:
            this._direction.right = true
@@ -51,7 +53,7 @@ class Paddle {
 
   
     addEventListener('keyup', (e) => {
-      switch (e.keycode) {
+      switch (e.keyCode) {
         case 37:
           this._direction.left = false
           break;
@@ -64,26 +66,5 @@ class Paddle {
 
   }
 }
-  // document.onkeydown = (e) => {
-    //   console.log(this._direction.left)
-    //   switch(e.keycode) {
-    //     case this._keys.left:
-    //       this._direction.left = true
-    //     break;
-    //     case this._keys.right:
-    //       this._direction.right = true
-    //     break;
-    //   } 
-    // }
 
-    // document.onkeyup = (e) => {
-    //   switch (e.keycode) {
-    //     case this._keys.left:
-    //       this._direction.left = false
-    //       break;
-    //     case this._keys.right:
-    //       this._direction.right = false
-    //       break;
-    //   }
-    // }
  
