@@ -42,6 +42,7 @@ class Paddle {
       addEventListener('keydown', (e) => {
         switch (e.keyCode) {
          case 37:
+           new Paddle(this._ctx,)
             this._direction.left = true
       
            break;
