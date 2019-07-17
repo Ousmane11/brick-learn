@@ -19,6 +19,8 @@ const brickGame = {
   },
   fps: 60,
   falsy: false,
+  pepe: false,
+  
   //bricks: [],
   
 init: function () {
@@ -40,10 +42,15 @@ setDimensions: function () {
 start: function () {
 this.reset ()
   this.Interval = setInterval(() => {
-    
+  
     this.framescounter++
     this.framescounter % 60 === 0 ? this.seconds++ : null
     this.framescounter % 3600 === 0 ? this.minutes++ : null
+    this.ballCollision()
+   // if (this.ballCollision() === true) {
+//
+   //   alert("collision course")
+   // }
     this.clearAll()
     this.moveAll()
     this.drawAll()
@@ -136,26 +143,20 @@ drawAll: function () {
 },
 
 setEventListener: function () {
-
+console.log(this.pepe)
     addEventListener('keydown', (e) => {
        if (e.keyCode === 32) {
          this.falsy = true
+         this.pepe = true
+         console.log(this.pepe)
       }
   })
-  
   //addEventListener('keyup', (e) => {
-  //  if (e.keyCode === 32) {
-  //   this.paddle.ballCollision()
-  //    
-  //    }
-  //  }
-  //})
-  //addEventListener('keyup', (e) => {
-  //  if (e.keyCode === 32) {
-  //    this.falsy = false
-  //    // this.ball.move()
+  // if (e.keyCode === 32) {
+  //   this.pepe = false
+  //  
 //
-  //  }
+  // }
   //})
   }, 
 
@@ -168,6 +169,61 @@ clearAll:function () {
     this.paddle.move()
     if(this.falsy) this.ball.move()
   },
+
+  ballCollision: function () {
+   console.log(this.ball._velY, this.ball._velX)
+   if (this.pepe) {
+    
+    if (this.ball._posX + this.ball._radius * 2 < this.paddle._posX + this.paddle._width &&
+      this.ball._posX + this.ball._radius * 2 >= this.paddle._posX &&
+      this.ball._posY > this.height - this.paddle._height) {
+     this.ball._velY *= -1
+      }
+    }
+  }
+  
+
+}
+   // if (this.ball._posY < this.height - this.paddle._height) {
+ //
+   //   if (this.ball._posX < this.paddle._posX) {
+   //     this.dx = this.ball._posX - this.paddle._posX
+//
+   //   } 
+   //   else if (this.ball._posX > this.paddle._posX + this.paddle._width) {
+   //     
+   //     this.dx = this.ball._posX - (this.paddle._posX + this.paddle._width)
+   //   } 
+   //   else {
+   //     this.dx = 0
+   //   }
+//
+   //   if (this.ball._posY < this.paddle._posY) {
+   //       this.dy = this.ball._posY - this.paddle._posY
+   //   } else if (this.ball._posY > this.paddle._posY + this.paddle._height) {
+   //       this.dy = this.ball._posY - (this.paddle._posY + this.paddle._height)
+   //     } else {
+   //       this.dy = 0
+   //     }
+   //   //console.log(`X ${this.ball._posX}, ${this.paddle._posX}`)
+   //   //console.log(`Y ${this.ball._posY}, ${this.paddle._posY}`)
+//
+   //   //console.log(typeof Math.sqrt(this.dx ** 2 + this.dy ** 2 ))
+   //  // console.log(typeof this.ball._width / 2)
+   //   //console.log( this.dx * this.dx + this.dy * this.dy < this.ball._radius * this.ball._radius)
+   //   console.log(this.dx * this.dx + this.dy * this.dy)
+   //   console.log(this.ball._radius * this.ball._radius)
+   //   return this.dx * this.dx + this.dy * this.dy < this.ball._radius * this.ball._radius
+   // 
+    
+  
+   //  collisionResponse: function () {
+   //    if (this.ballCollision() === true) {
+   // 
+   //      alert("collision course")
+   //    }
+   //  }
+  
   
   //bricksF: function () {
   //  for (let i= 0; i <= 10; i++){
@@ -177,4 +233,4 @@ clearAll:function () {
   //}
 
 
-}
+

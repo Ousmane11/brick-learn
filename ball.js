@@ -7,6 +7,7 @@ class Ball {
 
     this._width = width       
     this._height = height
+    this._radius = this._width / 2
     this._posX0 = xPaddle
     this._posX = this._posX0 
 
@@ -15,7 +16,7 @@ class Ball {
 
     this._velX = 5
     this._velY = 5
-
+  
     this.brickGame = brickGame
   }
   draw() {
@@ -39,39 +40,20 @@ class Ball {
       if(this._posY < 0) {
         this._velY *= -1
       }
-      this.ballCollision()
+    }
+      
+      //this.rebound()
     //if (this._posY >= this._posY0 + 30 && this._posX === this._posX0) {
     //    alert ("wow")
     //  }
         //SI CHOCA CON EL PADDLE
-      }
+      
     
   
-ballCollision() {
-  //SI CHOCA CON EL PADDLE
-  if (this._posX < this.brickGame.paddle._posX) {
-    this._dx = this._posX - this.brickGame.paddle._posX
-    
-  } else {
-    if (this._posX > this.brickGame.paddle._posX + this.brickGame.paddle._width) {
-      this._dx = this._posX - (this.brickGame.paddle._posX + this.brickGame.paddle._width)
-    } else {
-      this._dx = 0
-    }
-  }
-  if (this._posY < this.brickGame.paddle._posY) {
-    this._dy = this._posY - this.brickGame.paddle._posY
-  } else {
-    if (this._posY > this.brickGame.paddle._posY + this.brickGame.paddle._height) {
-      this._dy = this._posY - (this.brickGame.paddle._posY + this.brickGame.paddle._height)
-    } else {
-      this._dy = 0
-    }
-  }
-  return this._dx * this._dx + this._dy * this._dy < this._width / 2
-}
+  
 
 }
+
 
 //class Ball {
 //  constructor (ctx, w, h, xPaddle) {
@@ -135,7 +117,21 @@ ballCollision() {
 //}
 //
 
-
+//hint ark
+//if (boll.y >= fieldHeight - Platform.height - Boll.radius) {
+//  if (
+//    (boll.x + (Boll.radius * 2) >= platform.x) &&
+//    (boll.x - (Boll.radius * 2) <= platform.x + Platform.width)
+//  ) {
+//    //boll.angle *= -1
+//    const shift = (platform.x + (Platform.width / 2) - boll.x) / (Platform.width / 2)
+//    const shiftCoef = (shift / 2) + 0.5
+//    boll.angle = -(shiftCoef * (Math.PI / 2) + Math.PI / 4)
+//    return
+//  } else if (boll.y >= fieldHeight - Boll.radius) {
+//    game.status = 'finish'
+//  }
+//}
 
 
 

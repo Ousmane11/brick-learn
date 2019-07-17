@@ -9,8 +9,7 @@ class Paddle {
     this._height = h
     this._velX = 15
     this._keys = keys
-    this._dx = undefined
-    this._dy= undefined
+    
     this.setEventListener()
     //this.ballCollision()
    this._direction = {
@@ -87,7 +86,6 @@ class Paddle {
       addEventListener('keydown', (e) => {
         switch (e.keyCode) {
          case 37:
-           new Paddle(this._ctx,)
             this._direction.left = true
       
            break;
