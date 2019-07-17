@@ -1,6 +1,6 @@
 class Ball {
 
-  constructor(ctx, width, height,xPaddle, yPaddle) {
+  constructor(ctx, width, height,xPaddle, yPaddle, brickGame) {
     this._ctx = ctx
     this._image = new Image()
     this._image.src = "Images/metal_0002_sphere_600.png"
@@ -15,6 +15,8 @@ class Ball {
 
     this._velX = 5
     this._velY = 5
+
+    this.brickGame = brickGame
   }
   draw() {
     this._ctx.drawImage(
@@ -37,12 +39,37 @@ class Ball {
       if(this._posY < 0) {
         this._velY *= -1
       }
-      
+      this.ballCollision()
+    //if (this._posY >= this._posY0 + 30 && this._posX === this._posX0) {
+    //    alert ("wow")
+    //  }
         //SI CHOCA CON EL PADDLE
       }
-    //
-    //this._posY > window.innerHeight - this._height ? this._velY *= -1 : null
+    
   
+ballCollision() {
+  //SI CHOCA CON EL PADDLE
+  if (this._posX < this.brickGame.paddle._posX) {
+    this._dx = this._posX - this.brickGame.paddle._posX
+    
+  } else {
+    if (this._posX > this.brickGame.paddle._posX + this.brickGame.paddle._width) {
+      this._dx = this._posX - (this.brickGame.paddle._posX + this.brickGame.paddle._width)
+    } else {
+      this._dx = 0
+    }
+  }
+  if (this._posY < this.brickGame.paddle._posY) {
+    this._dy = this._posY - this.brickGame.paddle._posY
+  } else {
+    if (this._posY > this.brickGame.paddle._posY + this.brickGame.paddle._height) {
+      this._dy = this._posY - (this.brickGame.paddle._posY + this.brickGame.paddle._height)
+    } else {
+      this._dy = 0
+    }
+  }
+  return this._dx * this._dx + this._dy * this._dy < this._width / 2
+}
 
 }
 

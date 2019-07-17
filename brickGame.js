@@ -55,7 +55,7 @@ reset: function () {
 this.background = new Background(this.ctx,this.width,this.height)
 this.paddle = new Paddle(this.ctx, 180, 80, this.width/2 - 90 , this.height -60,this.keys, brickGame)
 
-this.ball = new Ball(this.ctx, 40, 40, this.paddle._posX+70, this.paddle._posY -15)
+this.ball = new Ball(this.ctx, 40, 40, this.paddle._posX+70, this.paddle._posY -15, brickGame)
 
 //Row 1
 this.brick = new Brick(this.ctx,"Images/0.png",400, 100)
@@ -140,17 +140,23 @@ setEventListener: function () {
     addEventListener('keydown', (e) => {
        if (e.keyCode === 32) {
          this.falsy = true
-      } 
-    
-    })
-
- // addEventListener('keyup', (e) => {
- //   if (e.keyCode === 32) {
- //     this.falsy = false
- //     // this.ball.move()
+      }
+  })
+  
+  //addEventListener('keyup', (e) => {
+  //  if (e.keyCode === 32) {
+  //   this.paddle.ballCollision()
+  //    
+  //    }
+  //  }
+  //})
+  //addEventListener('keyup', (e) => {
+  //  if (e.keyCode === 32) {
+  //    this.falsy = false
+  //    // this.ball.move()
 //
- //   }
- // })
+  //  }
+  //})
   }, 
 
 
