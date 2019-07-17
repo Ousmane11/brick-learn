@@ -10,6 +10,7 @@ const brickGame = {
   width: undefined,
   height: undefined,
   framescounter: 0,
+  obstacles: [],
   seconds: 0,
   minutes: 0,
   keys: {
@@ -17,13 +18,16 @@ const brickGame = {
     RIGHT: 39 
   },
   fps: 60,
+  falsy: false,
   //bricks: [],
   
 init: function () {
 this.canvas = document.getElementById("mycanvas")
 this.ctx = this.canvas.getContext("2d")
 this.setDimensions()
+this.setEventListener()
 this.start()
+
 },
 
 setDimensions: function () {
@@ -35,7 +39,6 @@ setDimensions: function () {
 
 start: function () {
 this.reset ()
- // this.bricksF()
   this.Interval = setInterval(() => {
     
     this.framescounter++
@@ -50,8 +53,10 @@ this.reset ()
 
 reset: function () {
 this.background = new Background(this.ctx,this.width,this.height)
-this.paddle = new Paddle(this.ctx, 180, 80,this.width/2 - 90 , this.height -60,this.keys)
-this.ball = new Ball(this.ctx, 40, 40, this.paddle._posX-70)
+this.paddle = new Paddle(this.ctx, 180, 80, this.width/2 - 90 , this.height -60,this.keys, brickGame)
+
+this.ball = new Ball(this.ctx, 40, 40, this.paddle._posX+70, this.paddle._posY -15)
+
 //Row 1
 this.brick = new Brick(this.ctx,"Images/0.png",400, 100)
 this.brick1 = new Brick(this.ctx, "Images/1.png", 450, 100)
@@ -109,101 +114,45 @@ this.brick11 = new Brick(this.ctx, "Images/1.png", 950, 100)
   this.brick49 = new Brick(this.ctx, "Images/1.png", 850, 300)
   this.brick50 = new Brick(this.ctx, "Images/0.png", 900, 300)
   this.brick51 = new Brick(this.ctx, "Images/1.png", 950, 300)
+  this.pushObstacles()
   
 },
 
-//board: function () { 
-//const board= [
-//    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-//    [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-//    [4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
-//  ]
-//  
-//  for(let i = 0; i< this.board.length; i++) {
-//    const row = this.board[i]
-//for (let j = 0; j < row.length; j++) {
-//  switch (this.board[i][j]) {
-//    case 0:
-//      new Brick(this.ctx, "./Images/0.png")
-//      //this.brick.draw()
-//      break;
-//    case 1:
-//      break;
-//    case 2:
-//      break;
-//    case 3:
-//      break;
-//    case 4:
-//      break;
-//
-//  }
-//}
-//  }
-//},
 
-/////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
+pushObstacles: function () {
+  this.obstacles.push(this.brick,this.brick1,this.brick2,this.brick3,this.brick4,this.brick5,this.brick6,this.brick7,this.brick8,this.brick9,
+    this.brick10,this.brick11,this.brick12,this.brick13,this.brick14,this.brick15,this.brick16,this.brick17,this.brick18,this.brick19,
+    this.brick20, this.brick21, this.brick22, this.brick23, this.brick24, this.brick25, this.brick26, this.brick27,this.brick28, this.brick29, this.brick30, this.brick31,
+    this.brick32, this.brick33, this.brick34, this.brick35, this.brick36, this.brick37, this.brick38, this.brick39, this.brick40, this.brick41,
+    this.brick42, this.brick43, this.brick44, this.brick45, this.brick46, this.brick47, this.brick48, this.brick49, this.brick50,this.brick51)
+},
 
 drawAll: function () {
   this.background.draw()
   this.paddle.draw()
-  this.ball._posX = this.paddle._posX +70  //no actualizaba la pos de paddle para dibujar ball.
   this.ball.draw()
-  this.brick.draw()
-  this.brick1.draw()
-  this.brick2.draw()
-  this.brick3.draw()
-  this.brick4.draw()
-  this.brick5.draw()
-  this.brick6.draw()
-  this.brick7.draw()
-  this.brick8.draw()
-  this.brick9.draw()
-  this.brick10.draw()
-  this.brick11.draw()
-  this.brick12.draw()
-  this.brick13.draw()
-  this.brick14.draw()
-  this.brick15.draw()
-  this.brick16.draw()
-  this.brick17.draw()
-  this.brick18.draw()
-  this.brick19.draw()
-  this.brick20.draw()
-  this.brick21.draw()
-  this.brick22.draw()
-  this.brick23.draw()
-  this.brick24.draw()
-  this.brick25.draw()
-  this.brick26.draw()
-  this.brick27.draw()
-  this.brick28.draw()
-  this.brick29.draw()
-  this.brick30.draw()
-  this.brick31.draw()
-  this.brick32.draw()
-  this.brick33.draw()
-  this.brick34.draw()
-  this.brick35.draw()
-  this.brick36.draw() 
-  this.brick37.draw()
-  this.brick38.draw() 
-  this.brick39.draw()
-  this.brick40.draw()
-  this.brick41.draw()
-  this.brick42.draw()
-  this.brick43.draw()
-  this.brick44.draw()
-  this.brick45.draw()
-  this.brick46.draw()
-  this.brick47.draw()
-  this.brick48.draw()
-  this.brick49.draw()
-  this.brick50.draw()
-  this.brick51.draw()
+
+  this.obstacles.forEach((elm) => { elm.draw()}) 
 },
+
+setEventListener: function () {
+
+    addEventListener('keydown', (e) => {
+       if (e.keyCode === 32) {
+         this.falsy = true
+      } 
+    
+    })
+
+ // addEventListener('keyup', (e) => {
+ //   if (e.keyCode === 32) {
+ //     this.falsy = false
+ //     // this.ball.move()
+//
+ //   }
+ // })
+  }, 
+
 
 clearAll:function () {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -211,6 +160,7 @@ clearAll:function () {
 
   moveAll: function () {
     this.paddle.move()
+    if(this.falsy) this.ball.move()
   },
   
   //bricksF: function () {

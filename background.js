@@ -2,7 +2,7 @@ class Background {
   constructor(ctx, w, h) {
     this._ctx = ctx
     this._image = new Image()
-    this._image.src = "Images/Desert Parallax by Cryptogene/Desert.png"
+    this._image.src = "Images/Desert.png"
     this._posX = 0
     this._posY = 0
     this._width = w
