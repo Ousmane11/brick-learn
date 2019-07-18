@@ -14,8 +14,8 @@ class Ball {
     this._posY0 = yPaddle
     this._posY = this._posY0
 
-    this._velX = 7
-    this._velY = 7
+    this._velX = 6.5
+    this._velY = 6.5
 
   
     this.brickGame = brickGame
