@@ -11,6 +11,7 @@ const brickGame = {
   height: undefined,
   framescounter: 0,
   obstacles: [],
+  dryballs: [],
   seconds: 0,
   minutes: 0,
   keys: {
@@ -20,8 +21,10 @@ const brickGame = {
   fps: 60,
   falsy: false,
   secondFalsy: false,
-  
-  //bricks: [],
+  relPos: undefined,
+  angle: undefined,
+  newVelX: undefined,
+
   
 init: function () {
 this.canvas = document.getElementById("mycanvas")
@@ -39,6 +42,8 @@ setDimensions: function () {
   this.canvas.height = this.height
 },
 
+
+
 start: function () {
 this.reset ()
   this.Interval = setInterval(() => {
@@ -49,9 +54,14 @@ this.reset ()
     
     
     this.clearAll()
+    this.clearDryBalls()
     this.moveAll()
     this.drawAll()
+    this.generateBalls()
     this.ballCollision()
+    this.brickCollision()
+    this.deflection()
+    this.youWin()
     
   },1000 / this.fps)
 },
@@ -136,19 +146,26 @@ drawAll: function () {
   this.background.draw()
   this.paddle.draw()
   this.ball.draw()
-
-  this.obstacles.forEach((elm) => { elm.draw()}) 
+  this.dryballs.forEach(dryball => dryball.draw())
+  this.obstacles.forEach(elm => elm.draw()) 
+  
 },
 
 setEventListener: function () {
-console.log(this.pepe)
     addEventListener('keydown', (e) => {
        if (e.keyCode === 32) {
          this.falsy = true
          this.secondFalsy = true
-         console.log(this.pepe)
       }
   })
+},
+
+clearDryBalls: function () {
+this.dryballs.forEach((dryball, idx, array) => {
+  if (dryball._posX > this.width) {
+array.splice(idx, 1)
+  }
+})
 },
 
 
@@ -159,20 +176,102 @@ clearAll:function () {
   moveAll: function () {
     this.paddle.move()
     if(this.falsy) this.ball.move()
+    this.dryballs.forEach ( elm => elm.move())
   },
+  
 
   ballCollision: function () {
-   console.log(this.ball._velY, this.ball._velX)
+   
    if (this.secondFalsy) {
     
     if (this.ball._posX + this.ball._radius * 2 < this.paddle._posX + this.paddle._width &&
-      this.ball._posX + this.ball._radius * 2 > this.paddle._posX &&
-      this.ball._posY > this.height - this.paddle._height) {
-        
-     this.ball._velY *= -1
-      }
-    }
-  }
-  
-}
+      this.ball._posX + this.ball._radius * 2 > this.paddle._posX && this.ball._posY > this.height - this.paddle._height) {
 
+        
+
+        this.ball._velY *= -1
+        
+       
+    } else if (this.ball._posY > this.height + this.ball._radius) {
+     this.gameover()
+    }
+    }
+  },
+
+  brickCollision: function () {
+    
+     this.obstacles.forEach((obstacle, idx, array) => {
+      //Comprobamos si alguno de los obstaculos colisiona.
+       
+      if (this.ball._posY - this.ball._radius < obstacle._posY + obstacle._height &&
+        this.ball._posX+ this.ball._radius > obstacle._posX &&
+        this.ball._posX + this.ball._radius - this.ball._radius < obstacle._posX + obstacle._width &&
+        this.ball._posY - this.ball._radius < obstacle._posY) {
+        array.splice(idx, 1)
+        this.ball._velY *= - 1
+   
+      }
+     
+    })
+  },
+
+    deflection: function() {
+      this.relPos = this.ball._posX - this.paddle._width
+        this.angle = this.relPos * (Math.PI / this.paddle._width),
+          this.newVelX = Math.cos(this.angle) * this.ball._velX
+      
+      
+    },
+
+    generateBalls: function () {
+      if (this.framescounter % 210 === 0) {
+          this.dryballs.push(new WestBall(this.ctx, 70, 70, 450))
+      }
+    },
+    
+
+   youWin: function () {
+if (this.obstacles.length === 0){
+
+       clearInterval(this.Interval)
+     this.clearAll()
+     this.background = new Background(this.ctx, this.width, this.height)
+     this.background.draw()
+
+     this.ctx.font = "bold 100px sans-serif"
+     this.ctx.fillStyle = "#451a19"
+     this.ctx.textAlign = "center"
+     this.ctx.fillText("You won!!!", this.width / 2, this.height / 2 - 50)
+}
+   },
+
+//  rebirth: function () {
+//    addEventListener("keypress", (e) => {
+//      if (e.keyCode === 84) {
+//
+//        console.log(e.keyCode)
+//      }
+//    })
+//  },
+
+  gameover: function () {
+    clearInterval(this.Interval)
+    this.clearAll()
+    this.background = new Background(this.ctx, this.width, this.height)
+    this.background.draw()
+    
+    this.ctx.style = "#451a19"
+    this.ctx.font = "bold 100px sans-serif"
+    this.ctx.textAlign = "center"
+    this.ctx.lineWidth = 5
+    this.ctx.strokeText("Game Over", this.width / 2, this.height / 2 - 50)
+
+    //this.ctx.font = "bold 40px sans-serif"
+    //this.ctx.style = "brown"
+    //this.ctx.textAlign = "center"
+    //this.ctx.strokeText("Press 'T' to try again ", this.width / 2, this.height / 2)
+    //this.rebirth()
+  
+},
+
+}

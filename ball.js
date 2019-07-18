@@ -14,8 +14,9 @@ class Ball {
     this._posY0 = yPaddle
     this._posY = this._posY0
 
-    this._velX = 8
-    this._velY = 8
+    this._velX = 7
+    this._velY = 7
+
   
     this.brickGame = brickGame
   }
@@ -33,12 +34,15 @@ class Ball {
    this._posX += this._velX
     if (this._posX > 0) {
       this._velX *= -1
+    
     }
       if(this._posX < window.innerWidth - 40) {
         this._velX *= -1
+      
       }
-      if(this._posY < 0) {
+      if(this._posY <= 0) {
         this._velY *= -1
+        
       }
     }
       
@@ -48,5 +52,4 @@ class Ball {
   
 
 }
-
 

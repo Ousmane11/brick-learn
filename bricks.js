@@ -20,3 +20,8 @@ draw() {
 }
 }
 
+const whatTimeIsIt = function (angle) {
+  let hour = Math.floor(angle / 30)
+  hour.toString()
+ console.log(hour)
+  }
