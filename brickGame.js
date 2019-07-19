@@ -171,9 +171,10 @@ jasmine: function () {
     this.ball._posX + 10 > this.brick15._posX &&
     this.ball._posX - 10 <= this.brick15._posX + this.brick15._width &&
     this.ball._posY > this.brick15._posY - this.brick15._height) {
+    this.points += 150
     this.love()
     this.ball._velY *= - 1
-    this.points += 150
+    
     }
 },
 ////aqui!!!!!!!!!!/// inicializa e invoca
