@@ -57,6 +57,7 @@ this.reset ()
     this.clearDryBalls()
     this.moveAll()
     this.drawAll()
+    this.jasmine()
     this.generateBalls()
     this.ballCollision()
     this.brickCollision()
@@ -93,7 +94,7 @@ this.brick11 = new Brick(this.ctx, "Images/1.png", 950, 75)
   this.brick12 = new Brick(this.ctx, "Images/HTML5.svg", 500, 125)
   this.brick13 = new Brick(this.ctx, "Images/CSS3.png", 550, 125)
   this.brick14 = new Brick(this.ctx, "Images/javascript.png", 600, 125)
-  this.brick15 = new Brick(this.ctx, "Images/jasmine.png", 650, 125)
+  
   this.brick16 = new Brick(this.ctx, "Images/mongo.png", 700, 125)
   this.brick17 = new Brick(this.ctx, "Images/expressjs.png", 750, 125)
   this.brick18 = new Brick(this.ctx, "Images/react.png", 800, 125)
@@ -140,7 +141,7 @@ this.brick11 = new Brick(this.ctx, "Images/1.png", 950, 75)
 
 pushObstacles: function () {
   this.obstacles.push(this.brick,this.brick1,this.brick2,this.brick3,this.brick4,this.brick5,this.brick6,this.brick7,this.brick8,this.brick9,
-    this.brick10,this.brick11,this.brick12,this.brick13,this.brick14,this.brick15,this.brick16,this.brick17,this.brick18,this.brick19,
+    this.brick10,this.brick11,this.brick12,this.brick13,this.brick14,this.brick16,this.brick17,this.brick18,this.brick19,
     this.brick20, this.brick21, this.brick22, this.brick23, this.brick24, this.brick25, this.brick26, this.brick27,this.brick28, this.brick29, this.brick30, this.brick31,
     this.brick32, this.brick33, this.brick34, this.brick35, this.brick36, this.brick37, this.brick38, this.brick39, this.brick40, this.brick41,
     this.brick42, this.brick43, this.brick44, this.brick45, this.brick46, this.brick47, this.brick48, this.brick49, this.brick50,this.brick51)
@@ -154,6 +155,26 @@ drawAll: function () {
   this.obstacles.forEach(elm => elm.draw()) 
   this.drawPoints()
   
+},
+
+jasmine: function () {
+  this.brick15 = new Brick(this.ctx, "Images/jasmine.png", 650, 125)
+  this.brick15.draw()
+
+  if (this.ball._posY + 10 < this.brick15._posY + this.brick15._height &&
+    this.ball._posX + 10 > this.brick15._posX &&
+    this.ball._posX - 10 <= this.brick15._posX + this.brick15._width &&
+    this.ball._posY > this.brick15._posY - this.brick15._height) {
+    this.love()
+    this.ball._velY *= - 1
+    this.points += 150
+    }
+},
+////aqui!!!!!!!!!!/// inicializa e invoca
+love: function () {
+  this.heart = new Heart(this.ctx, 20, 20)
+  this.heart.draw()
+  this.heart.move()
 },
 
 setEventListener: function () {
