@@ -3,7 +3,7 @@ class Heart {
   constructor(ctx, width, height) {
     this._ctx = ctx
     this._image = new Image()
-    this._image.src = "heart.png"
+    this._image.src = "Images/heart.png"
 
     this._width = width
     this._height = height
@@ -17,8 +17,8 @@ class Heart {
     this._ctx.drawImage(this._image, this._posX, this._posY, this._width, this._height)
   }
 
-  move() {
-    this._velY += this._gravity
-    this._posY += this._velY
-  }
+  //move() {
+  //  this._velY += this._gravity
+  //  this._posY += this._velY
+  //}
 }

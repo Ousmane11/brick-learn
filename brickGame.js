@@ -1,4 +1,10 @@
-window.onload = () => brickGame.init()
+window.onload = () => {
+  document.getElementById("startb").onclick = function () {
+    document.getElementById("startb").className = "hide"
+    brickGame.init()
+  }
+}
+
 
 const brickGame = {
   title: "Brick Lessons",
