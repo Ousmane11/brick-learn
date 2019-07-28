@@ -10,18 +10,13 @@ class Brick {
     this._height = 50
   }
 
-
-draw() {
-  this._ctx.drawImage(this._image,
-    this._posX,
-    this._posY,
-    this._width,
-    this._height)
-}
-}
-
-const whatTimeIsIt = function (angle) {
-  let hour = Math.floor(angle / 30)
-  hour.toString()
- console.log(hour)
+  draw() {
+    this._ctx.drawImage(this._image, this._posX, this._posY, this._width, this._height)
   }
+}
+
+//const whatTimeIsIt = function (angle) {
+//  let hour = Math.floor(angle / 30)
+//  hour.toString()
+// console.log(hour)
+//  }

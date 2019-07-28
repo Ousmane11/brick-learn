@@ -1,32 +1,26 @@
-
-img {
-width: 100vw;
-height: 100vh;
-margin: 0 auto
+body {
+  background-image: url(Images/intro.png);
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
-body{
-  background-image: url("Images/intro.png");
-  background-size: 100vw 100vh;
-background-repeat: no-repeat
-}
-
-.button1{
-margin: 380px  auto;
-display: block;
-height: 50px;
-width: 100px;
-padding: 0.35em 1.2em;
-border: 0.1em solid #FFFFFF;
-border-radius: 0.12em;
-box-sizing: border-box;
-text-decoration: none;
-font-family:'Roboto',sans-serif;
-font-weight: 300;
-color :#A0522D;
-text-align: center;
-transition: all 0.2s;
+.button1 {
+  margin: 380px auto;
+  display: block;
+  height: 50px;
+  width: 100px;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #a0522d;
+  text-align: center;
+  transition: all 0.2s;
 }
 .hide {
-  display: none
+  display: none;
 }
